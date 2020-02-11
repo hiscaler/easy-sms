@@ -89,9 +89,9 @@ class WebchineseGateway extends Gateway
      */
     protected function buildEndpoint(PhoneNumberInterface $to, MessageInterface $message, Config $config)
     {
-        $charset = $config->get('charset', 'utf-8');
-        if (in_array($charset, ['utf-8', 'gbk'])) {
-            $charset = 'utf-8';
+        $charset = $config->get('charset', 'utf8');
+        if (!in_array($charset, ['utf8', 'gbk'])) {
+            $charset = 'utf8';
         }
 
         return sprintf(self::ENDPOINT_TEMPLATE, $charset, $config->get('uid'), $config->get('key'), $to->getNumber(), $message->getContent());
